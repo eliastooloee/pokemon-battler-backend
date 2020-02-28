@@ -1,0 +1,2 @@
+class UsersPokemon < ApplicationRecord
+end
