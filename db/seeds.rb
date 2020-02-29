@@ -8,7 +8,7 @@
 pm_array = []
 desc_array = []
 
-for i in 1..pm_array.length
+for i in 1..9
   data = open("https://pokeapi.co/api/v2/pokemon/#{i}").read
   json = JSON.parse(data)
   pm_array.push(json)
