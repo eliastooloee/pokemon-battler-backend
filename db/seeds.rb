@@ -5,3 +5,28 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+pm_array = []
+desc_array = []
+
+for i in 1..pm_array.length
+  data = open("https://pokeapi.co/api/v2/pokemon/#{i}").read
+  json = JSON.parse(data)
+  pm_array.push(json)
+end
+
+# puts pm_array[0].keys
+
+for pokemon in pm_array
+  Pokemon.create(
+    species: pokemon["name"],
+    sprite_front: pokemon["sprites"]["front_default"],
+    sprite_back: pokemon["sprites"]["back_default"],
+    stat_speed: pokemon["stats"][0]["base_stat"],
+    stat_special_defense: pokemon["stats"][1]["base_stat"],
+    stat_special_attack: pokemon["stats"][2]["base_stat"],
+    stat_defense: pokemon["stats"][3]["base_stat"],
+    stat_attack: pokemon["stats"][4]["base_stat"],
+    stat_hp: pokemon["stats"][5]["base_stat"],
+    description: "tbd",
+  )
+end
