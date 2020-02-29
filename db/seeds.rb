@@ -8,6 +8,7 @@
 pm_array = []
 desc_array = []
 
+# right now this will only get data for the first nine pokemon
 for i in 1..9
   data = open("https://pokeapi.co/api/v2/pokemon/#{i}").read
   json = JSON.parse(data)
