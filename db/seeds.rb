@@ -8,14 +8,16 @@
 pm_array = []
 desc_array = []
 
-# right now this will only get data for the first nine pokemon
-for i in 1..9
+for i in 1..151
+  # get data about each of the first 151 pokemon
   data = open("https://pokeapi.co/api/v2/pokemon/#{i}").read
-  json = JSON.parse(data)
-  pm_array.push(json)
+  json_data = JSON.parse(data)
+  pm_array.push(json_data)
+  # get descriptions for each of the first 151 pokemon
+  desc = open("https://pokeapi.co/api/v2/pokemon-species/#{i}").read
+  json_desc = JSON.parse(desc)
+  desc_array.push(json_desc)
 end
-
-# puts pm_array[0].keys
 
 for pokemon in pm_array
   Pokemon.create(
@@ -28,6 +30,6 @@ for pokemon in pm_array
     stat_defense: pokemon["stats"][3]["base_stat"],
     stat_attack: pokemon["stats"][4]["base_stat"],
     stat_hp: pokemon["stats"][5]["base_stat"],
-    description: "tbd",
+    description: desc_array[pokemon["id"] - 1]["flavor_text_entries"][desc_array[pokemon["id"] - 1]["flavor_text_entries"].length - 1]["flavor_text"],
   )
 end
