@@ -1,2 +1,5 @@
 class UsersPokemonsController < ApplicationController
+
+    
+
 end
