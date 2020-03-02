@@ -1,13 +1,5 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
 pm_array = []
 desc_array = []
-types_array = []
 
 # get pokemon data and descriptions from the API
 for i in 1..151
@@ -19,13 +11,6 @@ for i in 1..151
   desc = open("https://pokeapi.co/api/v2/pokemon-species/#{i}").read
   json_desc = JSON.parse(desc)
   desc_array.push(json_desc)
-end
-
-# get type data from the API (stretch goal: add effectiveness)
-for i in 1..18
-  data = open("https://pokeapi.co/api/v2/type/#{i}").read
-  json_data = JSON.parse(data)
-  types_array.push(json_data)
 end
 
 # create pokemon using collected data
@@ -41,12 +26,22 @@ for pokemon in pm_array
     stat_attack: pokemon["stats"][4]["base_stat"],
     stat_hp: pokemon["stats"][5]["base_stat"],
     description: desc_array[pokemon["id"] - 1]["flavor_text_entries"][desc_array[pokemon["id"] - 1]["flavor_text_entries"].length - 1]["flavor_text"],
+    pokemontype: pokemon["types"][pokemon["types"].length - 1]["type"]["name"],
   )
 end
 
+# types_array = []
+
+# get type data from the API (stretch goal: add effectiveness)
+# for i in 1..18
+#   data = open("https://pokeapi.co/api/v2/type/#{i}").read
+#   json_data = JSON.parse(data)
+#   types_array.push(json_data)
+# end
+
 # create types using collected data
-for type in types_array
-  Type.create(
-    name: type["names"][6]["name"],
-  )
-end
+# for type in types_array
+#   Type.create(
+#     name: type["names"][6]["name"],
+#   )
+# end
