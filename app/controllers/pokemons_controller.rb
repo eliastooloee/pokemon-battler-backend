@@ -28,6 +28,6 @@ class PokemonsController < ApplicationController
   end
 
   def pokemon_params
-    params.require(:pokemon).permit(:name)
+    params.require(:pokemon).permit(:species, :sprite_front, :sprite_back, :stat_speed, :stat_special_defense, :stat_special_attack, :stat_defense, :stat_attack, :stat_hp, :description, :pokemontype)
   end
 end
