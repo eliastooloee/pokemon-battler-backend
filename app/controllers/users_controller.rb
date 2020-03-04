@@ -1,34 +1,35 @@
 class UsersController < ApplicationController
-    before_action :find_user, only: [:show, :edit, :update, :destroy]
+  before_action :find_user, only: [:show, :edit, :update, :destroy]
 
-    def show
-        render json: @user
-    end
+  def show
+    render json: @user
+  end
 
-    def new 
-        @user = User.new
-    end
+  def new
+    @user = User.new
+  end
 
-    def create 
-        @user = User.create(name: params[:name])
-    end
+  def create
+    @user = User.create(name: params[:name])
+    render json: @user
+  end
 
-    def destroy
-        @user.destroy
-    end
+  def destroy
+    @user.destroy
+  end
 
-    def update
-        @user.update(user_params)
-        render json: @user
-    end
+  def update
+    @user.update(user_params)
+    render json: @user
+  end
 
-    private
+  private
 
-    def find_user
-		@user = User.find(params[:id])
-    end
+  def find_user
+    @user = User.find(params[:id])
+  end
 
-    def user_params
-        params.require(:user).permit(:name)``
-    end
+  def user_params
+    params.require(:user).permit(:name)
+  end
 end
