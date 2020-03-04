@@ -16,7 +16,7 @@ end
 # create pokemon using collected data
 for pokemon in pm_array
   Pokemon.create(
-    species: pokemon["name"],
+    species: pokemon["name"].capitalize(),
     sprite_front: pokemon["sprites"]["front_default"],
     sprite_back: pokemon["sprites"]["back_default"],
     stat_speed: pokemon["stats"][0]["base_stat"],
